@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Buddy Finder | Browse Buddies</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Dynamic Gradient Background -->
+    <div class="gradient-bg"></div>
+    
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Glass Morphism Navbar -->
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-book-open"></i>
+                <span>StudyBuddy</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse.html" class="active">Browse</a></li>
+                <li><a href="matches.html">Matches</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="login.html" class="login-btn">Login</a></li>
+            </ul>
+            <div class="nav-hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="browse-page">
+        <section class="browse-header">
+            <h1>Find Your Study Buddy</h1>
+            <div class="search-filters glass">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search by subject, name, or university...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject">
+                            <option value="">All Subjects</option>
+                            <option value="computer-science">Computer Science</option>
+                            <option value="mathematics">Mathematics</option>
+                            <option value="physics">Physics</option>
+                            <!-- More subjects -->
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="location">Location</label>
+                        <select id="location">
+                            <option value="">Any Location</option>
+                            <option value="library">Library</option>
+                            <option value="hostel">Hostel</option>
+                            <option value="cafe">Cafe</option>
+                            <option value="online">Online</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="availability">Availability</label>
+                        <select id="availability">
+                            <option value="">Any Time</option>
+                            <option value="morning">Morning</option>
+                            <option value="afternoon">Afternoon</option>
+                            <option value="evening">Evening</option>
+                            <option value="weekends">Weekends</option>
+                        </select>
+                    </div>
+                    <button class="filter-btn">Apply Filters</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="buddies-grid">
+            <!-- Buddy cards will be populated by JavaScript -->
+            <div class="buddy-card glass" data-scroll="fade-up">
+                <div class="buddy-image">
+                    <img src="p1.avif" alt="Alex Johnson">
+                    <div class="buddy-rating">
+                        <i class="fas fa-star"></i>
+                        <span>4.8</span>
+                    </div>
+                </div>
+                <div class="buddy-info">
+                    <h3>Alex Johnson</h3>
+                    <p class="university">Stanford University</p>
+                    <div class="buddy-subjects">
+                        <span>Computer Science</span>
+                        <span>Mathematics</span>
+                    </div>
+                    <div class="buddy-availability">
+                        <p><i class="fas fa-clock"></i> Evenings, Weekends</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Library, Online</p>
+                    </div>
+                    <div class="buddy-actions">
+                        <button class="buddy-btn message-btn">Message</button>
+                        <button class="buddy-btn connect-btn">Connect</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- More buddy cards would be here -->
+        </section>
+        
+        <div class="pagination">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn next">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="glass-footer">
+        <!-- Same footer as index.html -->
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="main.js"></script>
+    <script src="cursor.js"></script>
+    <script src="matching.js"></script>
+</body>
+</html>

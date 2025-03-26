@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Buddy Finder | My Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Dynamic Gradient Background -->
+    <div class="gradient-bg"></div>
+    
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Glass Morphism Navbar -->
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-book-open"></i>
+                <span>StudyBuddy</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="matches.html">Matches</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="profile.html" class="active">Profile</a></li>
+                <li><a href="login.html" class="login-btn">Logout</a></li>
+            </ul>
+            <div class="nav-hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="profile-page">
+        <section class="profile-header">
+            <div class="profile-card glass">
+                <div class="profile-image">
+                    <img src="p3.avif" alt="Your Profile">
+                    <button class="edit-btn"><i class="fas fa-camera"></i></button>
+                </div>
+                <div class="profile-info">
+                    <h1>John Doe</h1>
+                    <p class="university">Harvard University</p>
+                    <div class="profile-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span>4.7 (12 reviews)</span>
+                    </div>
+                    <div class="profile-bio">
+                        <p>Computer Science major with a passion for algorithms and machine learning. Looking for study partners to prepare for exams and work on projects together.</p>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="profile-btn edit-btn">Edit Profile</button>
+                        <button class="profile-btn settings-btn"><i class="fas fa-cog"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="profile-details">
+            <div class="details-grid">
+                <div class="detail-card glass" data-scroll="fade-up">
+                    <h2><i class="fas fa-book"></i> Subjects</h2>
+                    <div class="subjects-list">
+                        <span>Computer Science</span>
+                        <span>Mathematics</span>
+                        <span>Artificial Intelligence</span>
+                        <button class="add-subject"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+                
+                <div class="detail-card glass" data-scroll="fade-up" data-scroll-delay="100">
+                    <h2><i class="fas fa-clock"></i> Availability</h2>
+                    <div class="availability-list">
+                        <div class="availability-item">
+                            <span>Monday</span>
+                            <span>Afternoon, Evening</span>
+                        </div>
+                        <div class="availability-item">
+                            <span>Wednesday</span>
+                            <span>Morning, Afternoon</span>
+                        </div>
+                        <div class="availability-item">
+                            <span>Weekends</span>
+                            <span>Flexible</span>
+                        </div>
+                        <button class="add-availability"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+                
+                <div class="detail-card glass" data-scroll="fade-up" data-scroll-delay="200">
+                    <h2><i class="fas fa-map-marker-alt"></i> Preferred Locations</h2>
+                    <div class="locations-list">
+                        <span>University Library</span>
+                        <span>Science Building</span>
+                        <span>Online</span>
+                        <button class="add-location"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+                
+                <div class="detail-card glass" data-scroll="fade-up" data-scroll-delay="300">
+                    <h2><i class="fas fa-heart"></i> Study Preferences</h2>
+                    <div class="preferences-list">
+                        <div class="preference-item">
+                            <span>Group Size:</span>
+                            <span>2-4 people</span>
+                        </div>
+                        <div class="preference-item">
+                            <span>Study Style:</span>
+                            <span>Focused with breaks</span>
+                        </div>
+                        <div class="preference-item">
+                            <span>Noise Level:</span>
+                            <span>Quiet to moderate</span>
+                        </div>
+                        <button class="edit-preferences">Edit Preferences</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="profile-reviews">
+            <h2 class="section-title">My Reviews</h2>
+            <div class="reviews-grid">
+                <div class="review-card glass" data-scroll="fade-up">
+                    <div class="review-header">
+                        <img src="p5.avif" alt="Sarah M.">
+                        <div>
+                            <h3>Sarah M.</h3>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <span class="review-date">2 weeks ago</span>
+                    </div>
+                    <div class="review-content">
+                        <p>John is an amazing study partner! He's very knowledgeable about algorithms and helped me understand difficult concepts. Our study sessions were productive and well-organized.</p>
+                    </div>
+                </div>
+                
+                <!-- More review cards would go here -->
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="glass-footer">
+        <!-- Same footer as index.html -->
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="main.js"></script>
+    <script src="cursor.js"></script>
+</body>
+</html>

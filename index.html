@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Buddy Finder | Find Your Perfect Study Partner</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Dynamic Gradient Background -->
+    <div class="gradient-bg"></div>
+    
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Glass Morphism Navbar -->
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-book-open"></i>
+                <span>StudyBuddy</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="matches.html">Matches</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="login.html" class="login-btn">Login</a></li>
+            </ul>
+            <div class="nav-hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Find Your Perfect <span>Study Buddy</span></h1>
+            <p class="hero-subtitle">Connect with students who share your subjects, schedule, and study preferences</p>
+            <div class="hero-actions">
+                <a href="register.html" class="hero-btn primary">Get Started</a>
+                <a href="browse.html" class="hero-btn secondary">Browse Now</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="p2.avif" alt="Students studying together">
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">Why Use Study Buddy Finder?</h2>
+        <div class="features-grid">
+            <div class="feature-card glass" data-scroll="fade-up">
+                <div class="feature-icon">
+                    <i class="fas fa-user-friends"></i>
+                </div>
+                <h3>Smart Matching</h3>
+                <p>Our algorithm finds the most compatible study partners based on your subjects, availability, and preferences.</p>
+            </div>
+            <div class="feature-card glass" data-scroll="fade-up" data-scroll-delay="100">
+                <div class="feature-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>Location-Based</h3>
+                <p>Find buddies who prefer the same study locations - library, hostel, cafe, or online sessions.</p>
+            </div>
+            <div class="feature-card glass" data-scroll="fade-up" data-scroll-delay="200">
+                <div class="feature-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Schedule Sync</h3>
+                <p>Match with students who have compatible schedules for productive study sessions.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="main.js"></script>
+    <script src="cursor.js"></script>
+</body>
+</html>

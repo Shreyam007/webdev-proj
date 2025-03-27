@@ -58,26 +58,29 @@ a {
     background: transparent;
 }
 
-/* Glass Morphism Navbar */
+/* Navbar Specific Styles */
 .glass-nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 1.5rem 5%;
+    padding: 1rem 5%;
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     z-index: 1000;
-    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    height: 70px; /* Fixed height for consistency */
 }
 
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -85,15 +88,22 @@ a {
 .nav-logo {
     display: flex;
     align-items: center;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--light-color);
+    gap: 12px; /* Space between icon and text */
 }
 
-.nav-logo i {
-    margin-right: 0.5rem;
-    color: var(--secondary-color);
+/* Logo Icon Styles */
+.nav-logo-icon {
+    font-size: 2rem; /* Adjust icon size */
+    color: var(--light-color);
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--light-color);
 }
 
 .nav-links {
@@ -125,14 +135,6 @@ a {
     width: 100%;
 }
 
-.nav-links a.active {
-    color: var(--secondary-color);
-}
-
-.nav-links a.active::after {
-    width: 100%;
-}
-
 .login-btn {
     padding: 0.5rem 1.5rem;
     background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
@@ -146,6 +148,7 @@ a {
     box-shadow: 0 5px 15px rgba(110, 69, 226, 0.4);
 }
 
+/* Mobile Menu Styles */
 .nav-hamburger {
     display: none;
     flex-direction: column;
@@ -160,6 +163,44 @@ a {
     height: 3px;
     background: white;
     transition: var(--transition);
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        transition: left 0.3s ease;
+    }
+    
+    .nav-links.active {
+        left: 0;
+    }
+    
+    .nav-hamburger {
+        display: flex;
+    }
+    
+    .nav-hamburger.active .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .nav-hamburger.active .line2 {
+        opacity: 0;
+    }
+    
+    .nav-hamburger.active .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
 }
 
 /* Hero Section */
@@ -388,3 +429,422 @@ a {
         flex-direction: column;
     }
 }
+
+/* Auth Page Styles */
+.auth-container {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.auth-box {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.auth-tabs {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 1.2rem;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.auth-tab.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.auth-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+.auth-form {
+    padding: 2rem;
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.auth-form h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.auth-form p {
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    transition: var(--transition);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(255, 126, 95, 0.2);
+}
+
+.form-label {
+    position: absolute;
+    top: 1rem;
+    left: 3rem;
+    transition: var(--transition);
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.form-group i:not(.toggle-password) {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    opacity: 0.8;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.toggle-password:hover {
+    opacity: 1;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.9rem;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    position: relative;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .checkmark::after {
+    display: block;
+}
+
+.forgot-password {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    transition: opacity 0.3s ease;
+}
+
+.forgot-password:hover {
+    opacity: 0.8;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 1.5rem;
+}
+
+.auth-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(110, 69, 226, 0.3);
+}
+
+.auth-divider {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.auth-divider::before, .auth-divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.auth-divider span {
+    padding: 0 1rem;
+}
+
+.google-auth-btn {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 1rem;
+    }
+    
+    .auth-box {
+        border-radius: 0.5rem;
+    }
+    
+    .auth-tab {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .form-group i:not(.toggle-password) {
+        top: 1.1rem;
+    }
+    
+    .form-label {
+        top: 1.1rem;
+    }
+}
+
+/* ===== Add these to your existing CSS ===== */
+
+/* Center the login form vertically and horizontally */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 50vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .login-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Style the footer links */
+  footer {
+    background: transparent;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .footer-links a {
+    color: #333; /* Dark gray - change to your preferred color */
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  /* Add social login buttons */
+  .social-login {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  /* OR divider styling */
+  .divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    color: #777;
+  }
+  
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .divider-text {
+    padding: 0 10px;
+  }
+
+  /* Update your footer styles with this */
+footer {
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Purple to blue gradient */
+    padding: 20px;
+    text-align: center;
+    color: white; /* Ensures text is visible */
+  }
+  
+  .footer-links a {
+    color: white !important; /* Forces white text */
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+
+/* Add this to your CSS */
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .login-page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Changed from center */
+    padding-top: 100px; /* Adjust this value as needed */
+  }
+
+/* ===== Floating Label Effect (Transparent Background) ===== */
+.input-group {
+    position: relative;
+    margin: 25px 0;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: transparent;
+    z-index: 1;
+    color: white; /* Text color */
+  }
+  
+  .input-group label {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+  
+  /* When input is focused or has content */
+  .input-group input:focus + label,
+  .input-group input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.8rem;
+    color: white; /* Full white when active */
+    background: transparent; /* Remove white background */
+    text-shadow: 0 0 3px rgba(0,0,0,0.5); /* Improves readability */
+  }
+  
+  .input-group input:focus {
+    border-color: white;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255,255,255,0.3);
+  }
+  
+  /* For dark background pages */
+  body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }

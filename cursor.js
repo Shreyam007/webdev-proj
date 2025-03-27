@@ -1,4 +1,4 @@
-// Custom Cursor
+// Custom Cursor - Subtle Version
 class CustomCursor {
     constructor() {
         this.cursor = document.createElement('div');
@@ -23,42 +23,59 @@ class CustomCursor {
     
     moveCursor() {
         document.addEventListener('mousemove', (e) => {
-            this.cursor.style.left = `${e.clientX}px`;
-            this.cursor.style.top = `${e.clientY}px`;
+            const { clientX, clientY } = e;
             
-            // Delayed follower effect
-            setTimeout(() => {
-                this.cursorFollower.style.left = `${e.clientX}px`;
-                this.cursorFollower.style.top = `${e.clientY}px`;
-            }, 100);
+            // Main cursor (instant movement)
+            this.cursor.style.left = `${clientX}px`;
+            this.cursor.style.top = `${clientY}px`;
+            
+            // Follower cursor (delayed movement)
+            requestAnimationFrame(() => {
+                this.cursorFollower.style.left = `${clientX}px`;
+                this.cursorFollower.style.top = `${clientY}px`;
+            });
         });
     }
     
     hoverEffects() {
         // Elements that should trigger cursor change
         const hoverElements = [
-            'a', 'button', '.feature-card', '.hero-btn',
-            'input', 'textarea', '.ripple', '.login-btn'
+            'a', 
+            'button', 
+            '.hero-btn',
+            '.feature-card',
+            '.login-btn',
+            'input',
+            'textarea',
+            '[data-cursor-hover]' // Add this attribute to elements that need hover
         ];
         
         hoverElements.forEach(selector => {
             document.querySelectorAll(selector).forEach(element => {
                 element.addEventListener('mouseenter', () => {
                     this.cursor.classList.add('cursor-active');
-                    if (selector === 'a' || selector === 'button') {
-                        element.style.cursor = 'none';
-                    }
+                    this.cursorFollower.classList.add('cursor-active');
+                    element.style.cursor = 'none';
                 });
                 
                 element.addEventListener('mouseleave', () => {
                     this.cursor.classList.remove('cursor-active');
+                    this.cursorFollower.classList.remove('cursor-active');
                 });
             });
         });
     }
 }
 
-// Initialize custom cursor when DOM is loaded
+// Initialize only if not on a touch device
 document.addEventListener('DOMContentLoaded', () => {
-    new CustomCursor();
+    if (!('ontouchstart' in window || navigator.maxTouchPoints)) {
+        new CustomCursor();
+    } else {
+        // Remove cursor elements if they exist
+        const existingCursor = document.querySelector('.custom-cursor');
+        const existingFollower = document.querySelector('.cursor-follower');
+        if (existingCursor) existingCursor.remove();
+        if (existingFollower) existingFollower.remove();
+    }
 });

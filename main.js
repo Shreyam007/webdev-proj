@@ -108,25 +108,39 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Dynamic Gradient Background
-    const gradientBg = document.querySelector('.gradient-bg');
-    if (gradientBg) {
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            gradientBg.style.background = `
-                radial-gradient(
-                    at ${x * 100}% ${y * 100}%,
-                    rgba(110, 69, 226, 0.8) 0%,
-                    rgba(136, 211, 206, 0.6) 30%,
-                    rgba(255, 126, 95, 0.4) 60%,
-                    rgba(26, 26, 46, 1) 100%
-                )
-            `;
+    // Remove the gradient background animation code completely
+// Just keep the particles initialization and other functionality
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('particles-js')) {
+        particlesJS('particles-js', {
+            // ... keep your existing particles config ...
         });
     }
 
+    // Remove this entire block that was changing the gradient:
+    /*
+    const gradientBg = document.querySelector('.gradient-bg');
+    if (gradientBg) {
+        document.addEventListener('mousemove', (e) => {
+            // REMOVE THIS ENTIRE MOUSEMOVE LISTENER
+        });
+    }
+    */
+
+    // Keep the rest of your existing code...
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // ... rest of your existing JavaScript ...
+});
     // Navbar Toggle
     const hamburger = document.querySelector('.nav-hamburger');
     const navLinks = document.querySelector('.nav-links');

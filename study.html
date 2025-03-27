@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyBuddy - Schedule Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6e45e2;
+            --secondary-color: #88d3ce;
+            --accent-color: #ff7e5f;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--light-color);
+            background: linear-gradient(135deg, var(--dark-color) 0%, #16213e 100%);
+            min-height: 100vh;
+        }
+
+        /* Navbar Styles */
+        .glass-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light-color);
+        }
+
+        .nav-logo i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 500;
+            color: var(--light-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--secondary-color);
+        }
+
+        .login-btn {
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 50px;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(110, 69, 226, 0.4);
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .nav-hamburger div {
+            width: 100%;
+            height: 3px;
+            background: white;
+            transition: var(--transition);
+        }
+
+        /* Main Content Styles */
+        .container {
+            padding: 100px 20px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(31, 38, 135, 0.4);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        .selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .selection-item {
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .selection-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .selection-item.selected {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-color: transparent;
+            color: white;
+            font-weight: 600;
+        }
+
+        .time-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .time-slot {
+            padding: 10px 15px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .time-slot:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .time-slot.selected {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-color: transparent;
+            color: white;
+            font-weight: 600;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 40px auto 0;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(110, 69, 226, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(110, 69, 226, 0.6);
+        }
+
+        /* Footer Styles */
+        .glass-footer {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            padding: 2rem 5%;
+            color: white;
+            position: relative;
+            z-index: 100;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-logo i {
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-column a {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--glass-bg);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: left 0.3s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-hamburger {
+                display: flex;
+            }
+            
+            .nav-hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .nav-hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .nav-hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+            
+            .selection-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 100px 15px 60px;
+            }
+            
+            .glass-card {
+                padding: 20px;
+            }
+            
+            .footer-column {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Glass Morphism Navbar -->
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <div class="nav-logo" style="margin-right: auto; padding-left: 20px;">
+                <img src="logo.png" alt="Logo" class="nav-logo-img" style="height: 60px; width: auto;">
+            </div><ul class="nav-links">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="matches.html">Matches</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="login.html" class="login-btn">Login</a></li>
+            </ul>
+            <div class="nav-hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 style="margin-top: 5vh;">Create Study Schedule</h1>
+        
+        <!-- Subjects Selection -->
+        <div class="glass-card">
+            <h2>Choose Subjects</h2>
+            <div class="selection-grid" id="subjects-grid">
+                <div class="selection-item" data-value="web-programming">Web Programming</div>
+                <div class="selection-item" data-value="mathematics">Mathematics</div>
+                <div class="selection-item" data-value="oop">OOP</div>
+                <div class="selection-item" data-value="data-structures">Data Structures</div>
+                <div class="selection-item" data-value="algorithms">Algorithms</div>
+                <div class="selection-item" data-value="database">Database Systems</div>
+                <div class="selection-item" data-value="networking">Computer Networking</div>
+                <div class="selection-item" data-value="ai">Artificial Intelligence</div>
+                <div class="selection-item" data-value="ml">Machine Learning</div>
+                <div class="selection-item" data-value="chemistry">Chemistry</div>
+                <div class="selection-item" data-value="physics">Physics</div>
+                <div class="selection-item" data-value="bee">Basic Electrical</div>
+                <div class="selection-item" data-value="bxe">Basic Electronics</div>
+                <div class="selection-item" data-value="other">Others</div>
+            </div>
+        </div>
+        
+        <!-- Time Selection -->
+        <div class="glass-card">
+            <h2>Select Time Slot</h2>
+            <div class="time-slots" id="time-slots">
+                <div class="time-slot" data-value="8-10">8:00 - 10:00 AM</div>
+                <div class="time-slot" data-value="10-12">10:00 - 12:00 PM</div>
+                <div class="time-slot" data-value="12-2">12:00 - 2:00 PM</div>
+                <div class="time-slot" data-value="2-4">2:00 - 4:00 PM</div>
+                <div class="time-slot" data-value="4-6">4:00 - 6:00 PM</div>
+                <div class="time-slot" data-value="6-8">6:00 - 8:00 PM</div>
+            </div>
+        </div>
+        
+        <!-- Location Selection -->
+        <div class="glass-card">
+            <h2>Preferred Location</h2>
+            <div class="selection-grid" id="location-grid">
+                <div class="selection-item" data-value="library">Library</div>
+                <div class="selection-item" data-value="canteen">Main Canteen</div>
+                <div class="selection-item" data-value="ladies-canteen">Ladies Canteen</div>
+                <div class="selection-item" data-value="academic-block">Academic Block</div>
+                <div class="selection-item" data-value="computer-lab">Computer Lab</div>
+                <div class="selection-item" data-value="hostel">Hostel Common Room</div>
+                <div class="selection-item" data-value="seminar-hall">Seminar Hall</div>
+                <div class="selection-item" data-value="garden">University Garden</div>
+                <div class="selection-item" data-value="admin-block">Admin-Block</div>
+            </div>
+        </div>
+        
+        <button class="submit-btn" id="submit-btn">Find Study Partners</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="glass-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-book-open"></i>
+                <span>StudyBuddy</span>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Navigation</h4>
+                    <a href="index.html">Home</a>
+                    <a href="browse.html">Browse</a>
+                    <a href="matches.html">Matches</a>
+                    <a href="messages.html">Messages</a>
+                    <a href="profile.html">Profile</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <a href="#">Study Tips</a>
+                    <a href="#">Blog</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Study Buddy Finder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Toggle for Mobile
+        const hamburger = document.querySelector('.nav-hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Selection functionality
+        document.querySelectorAll('.selection-item, .time-slot').forEach(item => {
+            item.addEventListener('click', function() {
+                // For subject and location grids (single selection)
+                if(this.parentElement.id === 'subjects-grid' || this.parentElement.id === 'location-grid') {
+                    // Remove selection from siblings
+                    this.parentElement.querySelectorAll('.selected').forEach(selected => {
+                        selected.classList.remove('selected');
+                    });
+                }
+                
+                this.classList.toggle('selected');
+            });
+        });
+
+        // Submit button functionality
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            const selectedSubject = document.querySelector('#subjects-grid .selected');
+            const selectedTime = document.querySelector('#time-slots .selected');
+            const selectedLocation = document.querySelector('#location-grid .selected');
+            
+            if(!selectedSubject || !selectedTime || !selectedLocation) {
+                alert('Please select one option from each section');
+                return;
+            }
+            
+            // Here you would normally send data to your backend
+            alert(`Schedule created!\nSubject: ${selectedSubject.textContent}\nTime: ${selectedTime.textContent}\nLocation: ${selectedLocation.textContent}`);
+            
+            // Reset selections
+            document.querySelectorAll('.selected').forEach(item => {
+                item.classList.remove('selected');
+            });
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

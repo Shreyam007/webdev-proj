@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Buddy Finder | Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animation.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body style="margin-top: 10vh ;">
+    <!-- Dynamic Gradient Background -->
+    <div class="gradient-bg"></div>
+    
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Glass Morphism Navbar -->
+    <nav class="glass-nav">
+        <div class="nav-container">
+            
+                <div class="nav-logo" style="margin-right: auto; padding-left: 20px;">
+                    <img src="logo.png" alt="Logo" class="nav-logo-img" style="height: 60px; width: auto;">
+                </div><ul class="nav-links">
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="matches.html">Matches</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="login.html" class="login-btn active">Login</a></li>
+            </ul>
+            <div class="nav-hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Auth Container -->
+    <main class="auth-container">
+        <div class="auth-box glass" data-scroll="fade-in">
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="signup">Sign Up</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active" data-form="login">
+                <h2>Welcome Back</h2>
+                <p>Login to access your Study Buddy account</p>
+                
+            <!-- Your HTML structure (keep everything else the same) -->
+                <div class="input-group">
+                <input type="email" id="email" placeholder=" " required>
+                <label for="email">Email Address</label>
+                </div>
+  
+                <div class="input-group">
+                <input type="password" id="password" placeholder=" " required>
+                <label for="password">Password</label>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="auth-btn ripple">Login</button>
+                
+                <div class="auth-divider">
+                    <span>or continue with</span>
+                </div>
+
+<!-- Add this RIGHT AFTER your "OR CONTINUE WITH" line -->
+            <div class="social-buttons">
+            <button class="social-btn google">Google</button>
+            <button class="social-btn facebook">Facebook</button>
+            </div>
+  
+            <style>
+                
+              .social-buttons {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+                margin-top: 20px;
+                }
+    
+                .social-btn {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 25px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                }
+    
+                .social-btn.google {
+                background: #DB4437;
+                color: white;
+                }
+    
+                .social-btn.facebook {
+                background: #4267B2;
+                color: white;
+                }
+                </style>
+                
+                <div id="googleLogin" class="google-auth-btn">
+                    <div class="g_id_signin"
+                        data-type="standard"
+                        data-shape="pill"
+                        data-theme="filled_blue"
+                        data-text="continue_with"
+                        data-size="large"
+                        data-logo_alignment="left"
+                        data-width="300">
+                    </div>
+                </div>
+            </form>
+            
+            <!-- Signup Form -->
+            <form id="signupForm" class="auth-form" data-form="signup">
+                <h2>Create Account</h2>
+                <p>Join our community of students</p>
+                
+                <div class="form-group">
+                    <input type="text" id="signupName" class="form-input" placeholder=" " required>
+                    <label for="signupName" class="form-label">Full Name</label>
+                    <i class="fas fa-user"></i>
+                </div>
+                
+                <div class="form-group">
+                    <input type="email" id="signupEmail" class="form-input" placeholder=" " required>
+                    <label for="signupEmail" class="form-label">Email Address</label>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" id="signupPassword" class="form-input" placeholder=" " required>
+                    <label for="signupPassword" class="form-label">Password</label>
+                    <i class="fas fa-lock"></i>
+                    <i class="fas fa-eye toggle-password" data-target="signupPassword"></i>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" id="signupConfirm" class="form-input" placeholder=" " required>
+                    <label for="signupConfirm" class="form-label">Confirm Password</label>
+                    <i class="fas fa-lock"></i>
+                </div>
+                
+                <label class="checkbox-container" style="margin-bottom: 2vh;">
+                    <input type="checkbox" required>
+                    <span class="checkmark"></span>
+                    I agree to the Terms of Service and Privacy Policy
+                </label>
+                
+                <button type="submit" class="auth-btn ripple">Sign Up</button>
+                
+                <div class="auth-divider">
+                    <span>or sign up with</span>
+                </div>
+                
+                <div id="googleSignup" class="google-auth-btn">
+                    <div class="g_id_signin"
+                        data-type="standard"
+                        data-shape="pill"
+                        data-theme="filled_blue"
+                        data-text="signup_with"
+                        data-size="large"
+                        data-logo_alignment="left"
+                        data-width="300">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="glass-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-book-open"></i>
+                <span>StudyBuddy</span>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Navigation</h4>
+                    <a href="index.html">Home</a>
+                    <a href="browse.html">Browse</a>
+                    <a href="matches.html">Matches</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <a href="#">Study Tips</a>
+                    <a href="#">Blog</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Study Buddy Finder. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="main.js"></script>
+    <script src="cursor.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

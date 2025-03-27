@@ -38,20 +38,14 @@
     transition-delay: 0.3s;
 }
 
-/* Gradient Animation */
-.gradient-animate {
-    background: linear-gradient(-45deg, #6e45e2, #88d3ce, #ff7e5f, #feb47b);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+/* Remove the gradient background effect on cursor movement */
+.gradient-bg {
+    background: linear-gradient(135deg, var(--dark-color) 0%, #16213e 100%) !important;
+    /* Remove the transition that causes the color change */
+    transition: none !important;
 }
 
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Cursor Effects */
+/* Keep all cursor styles the same as original */
 .custom-cursor {
     position: fixed;
     width: 20px;
@@ -86,6 +80,50 @@
     width: 30px;
     height: 30px;
     border-color: rgba(255, 126, 95, 0.5);
+}
+
+/* Updated Cursor Effects - More Subtle */
+.custom-cursor {
+    position: fixed;
+    width: 12px; /* Reduced from 20px */
+    height: 12px; /* Reduced from 20px */
+    border-radius: 50%;
+    background: rgba(110, 69, 226, 0.3); /* More transparent */
+    pointer-events: none;
+    mix-blend-mode: normal; /* Changed from screen */
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: 
+        transform 0.1s ease,
+        width 0.3s ease, 
+        height 0.3s ease;
+}
+
+.cursor-follower {
+    position: fixed;
+    width: 30px; /* Reduced from 40px */
+    height: 30px; /* Reduced from 40px */
+    border: 1px solid rgba(110, 69, 226, 0.2); /* More subtle border */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: 
+        transform 0.3s ease, 
+        width 0.3s ease, 
+        height 0.3s ease,
+        border 0.3s ease;
+}
+
+.cursor-active .custom-cursor {
+    transform: translate(-50%, -50%) scale(1.3); /* Less aggressive scaling */
+    background: rgba(255, 126, 95, 0.25); /* More transparent */
+}
+
+.cursor-active .cursor-follower {
+    width: 25px; /* Less dramatic change */
+    height: 25px;
+    border-color: rgba(255, 126, 95, 0.3); /* More subtle */
 }
 
 /* Button Pulse Animation */

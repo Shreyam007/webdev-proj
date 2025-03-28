@@ -3,134 +3,631 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Buddy Finder | Browse Buddies</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="animation.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <title>Browse Students | Tech Titans</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    <!-- Dynamic Gradient Background -->
-    <div class="gradient-bg"></div>
-    
-    <!-- Particle Background -->
-    <div id="particles-js"></div>
-    
-    <!-- Glass Morphism Navbar -->
-    <nav class="glass-nav">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <i class="fas fa-book-open"></i>
-                <span>StudyBuddy</span>
+<style>
+    /* Study Hub Cursor */
+.study-cursor {
+    position: fixed;
+    width: 16px;
+    height: 16px;
+    background: rgba(110, 69, 226, 0.5); /* Primary purple with transparency */
+    border: 2px solid #88d3ce; /* Teal border */
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: 
+        transform 0.15s ease,
+        width 0.2s ease,
+        height 0.2s ease,
+        background 0.2s ease;
+}
+
+.study-cursor-hover {
+    transform: translate(-50%, -50%) scale(1.8);
+    background: rgba(255, 126, 95, 0.7); /* Accent orange */
+    border-color: #6e45e2; /* Purple border on hover */
+}
+</style>
+<body style="
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #f8f9fa;
+    background-color: #1a1a2e;
+    overflow-x: hidden;
+    line-height: 1.6;
+">
+
+    <!-- Navbar with Gradient Hover Underlines -->
+    <nav style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 1rem 5%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        height: 70px;
+    ">
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        ">
+            <!-- Logo -->
+            <div class="nav-logo" style="margin-right: auto;">
+                <a href="index.html">
+                <img src="logo.png" alt="Tech Titans Logo" style="height: 60px; width: auto;">
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="browse.html" class="active">Browse</a></li>
-                <li><a href="matches.html">Matches</a></li>
-                <li><a href="messages.html">Messages</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="login.html" class="login-btn">Login</a></li>
+        </a>
+        
+            <!-- Navigation Links -->
+            <ul style="
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+            margin-right: 90px;  /* This will push everything left */
+            padding-left: 20px; /* Add some left padding if needed */
+            ">
+                <li><a href="index.html" style="
+                    position: relative;
+                    padding: 0.5rem 0;
+                    font-weight: 500;
+                    color: #f8f9fa;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                " onmouseover="this.querySelector('.nav-underline').style.background='linear-gradient(45deg, #6e45e2, #ff7e5f)'; this.querySelector('.nav-underline').style.height='3px'" 
+                onmouseout="this.querySelector('.nav-underline').style.background='transparent'; this.querySelector('.nav-underline').style.height='2px'">
+                    Home
+                    <span class="nav-underline" style="
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 0;
+                        background: transparent;
+                        transition: all 0.3s ease;
+                    "></span>
+                </a></li>
+                
+                <li><a href="browse.html" style="
+                    position: relative;
+                    padding: 0.5rem 0;
+                    font-weight: 500;
+                    color: #88d3ce;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                " onmouseover="this.querySelector('.nav-underline').style.background='linear-gradient(45deg, #6e45e2, #ff7e5f)'; this.querySelector('.nav-underline').style.height='3px'" 
+                onmouseout="this.querySelector('.nav-underline').style.background='#88d3ce'; this.querySelector('.nav-underline').style.height='2px'">
+                    Browse
+                    <span class="nav-underline" style="
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 2px;
+                        background: #88d3ce;
+                        transition: all 0.3s ease;
+                    "></span>
+                </a></li>
+                
+                <li><a href="match.html" style="
+                    position: relative;
+                    padding: 0.5rem 0;
+                    font-weight: 500;
+                    color: #f8f9fa;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                " onmouseover="this.querySelector('.nav-underline').style.background='linear-gradient(45deg, #6e45e2, #ff7e5f)'; this.querySelector('.nav-underline').style.height='3px'" 
+                onmouseout="this.querySelector('.nav-underline').style.background='transparent'; this.querySelector('.nav-underline').style.height='2px'">
+                    Matches
+                    <span class="nav-underline" style="
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 0;
+                        background: transparent;
+                        transition: all 0.3s ease;
+                    "></span>
+                </a></li>
+                
+                <li><a href="messages.html" style="
+                    position: relative;
+                    padding: 0.5rem 0;
+                    font-weight: 500;
+                    color: #f8f9fa;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                " onmouseover="this.querySelector('.nav-underline').style.background='linear-gradient(45deg, #6e45e2, #ff7e5f)'; this.querySelector('.nav-underline').style.height='3px'" 
+                onmouseout="this.querySelector('.nav-underline').style.background='transparent'; this.querySelector('.nav-underline').style.height='2px'">
+                    Messages
+                    <span class="nav-underline" style="
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 0;
+                        background: transparent;
+                        transition: all 0.3s ease;
+                    "></span>
+                </a></li>
+                
+                <li><a href="profile.html" style="
+                    position: relative;
+                    padding: 0.5rem 0;
+                    font-weight: 500;
+                    color: #f8f9fa;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                " onmouseover="this.querySelector('.nav-underline').style.background='linear-gradient(45deg, #6e45e2, #ff7e5f)'; this.querySelector('.nav-underline').style.height='3px'" 
+                onmouseout="this.querySelector('.nav-underline').style.background='transparent'; this.querySelector('.nav-underline').style.height='2px'">
+                    Profile
+                    <span class="nav-underline" style="
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 0;
+                        background: transparent;
+                        transition: all 0.3s ease;
+                    "></span>
+                </a></li>
+                
+                <li><a href="login.html" style="
+                    padding: 0.5rem 1.5rem;
+                    background: linear-gradient(45deg, #6e45e2, #ff7e5f);
+                    border-radius: 50px;
+                    color: white;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(110, 69, 226, 0.4)'" 
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Login</a></li>
             </ul>
-            <div class="nav-hamburger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
         </div>
     </nav>
-    
+
+
+
     <!-- Main Content -->
-    <main class="browse-page">
-        <section class="browse-header">
-            <h1>Find Your Study Buddy</h1>
-            <div class="search-filters glass">
-                <div class="search-bar">
-                    <input type="text" placeholder="Search by subject, name, or university...">
-                    <button class="search-btn"><i class="fas fa-search"></i></button>
+    <main style="
+        margin-top: 90px;
+        padding: 2rem 5%;
+        min-height: calc(100vh - 90px);
+    ">
+        <h1 style="
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #f8f9fa;
+            position: relative;
+        ">
+            Browse Students
+            <span style="
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                width: 80px;
+                height: 4px;
+                background: linear-gradient(90deg, #6e45e2, #ff7e5f);
+            "></span>
+        </h1>
+
+        <!-- Student Listings Grid -->
+        <div style="
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        ">
+            <!-- Student Card 1 -->
+            <div style="
+                padding: 2rem;
+                border-radius: 1rem;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+                transition: all 0.3s ease;
+                transform: translateY(0);
+            " onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 35px rgba(31, 38, 135, 0.4)'; this.style.border='1px solid rgba(110, 69, 226, 0.5)'" 
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px 0 rgba(31, 38, 135, 0.37)'; this.style.border='1px solid rgba(255, 255, 255, 0.2)'">
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                ">
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        background: linear-gradient(45deg, #6e45e2, #ff7e5f);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-right: 1rem;
+                        color: white;
+                        font-size: 1.5rem;
+                    ">MK</div>
+                    <div>
+                        <h3 style="
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: 1.5rem;
+                            margin-bottom: 0.25rem;
+                            color: #f8f9fa;
+                        ">Manik Gupta</h3>
+                        <p style="color: rgba(255, 255, 255, 0.8);">Computer Science</p>
+                    </div>
                 </div>
-                <div class="filters">
-                    <div class="filter-group">
-                        <label for="subject">Subject</label>
-                        <select id="subject">
-                            <option value="">All Subjects</option>
-                            <option value="computer-science">Computer Science</option>
-                            <option value="mathematics">Mathematics</option>
-                            <option value="physics">Physics</option>
-                            <!-- More subjects -->
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="location">Location</label>
-                        <select id="location">
-                            <option value="">Any Location</option>
-                            <option value="library">Library</option>
-                            <option value="hostel">Hostel</option>
-                            <option value="cafe">Cafe</option>
-                            <option value="online">Online</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="availability">Availability</label>
-                        <select id="availability">
-                            <option value="">Any Time</option>
-                            <option value="morning">Morning</option>
-                            <option value="afternoon">Afternoon</option>
-                            <option value="evening">Evening</option>
-                            <option value="weekends">Weekends</option>
-                        </select>
-                    </div>
-                    <button class="filter-btn">Apply Filters</button>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <p style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <span style="margin-right: 0.5rem;">📍</span>Library
+                    </p>
+                    <p style="display: flex; align-items: center;">
+                        <span style="margin-right: 0.5rem;">⏰</span> 9:00 AM - 5:00 PM GMT
+                    </p>
                 </div>
+                
+                <button style="
+                    width: 100%;
+                    padding: 0.8rem;
+                    background: linear-gradient(45deg, #6e45e2, #88d3ce);
+                    border: none;
+                    border-radius: 8px;
+                    color: white;
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 20px rgba(110, 69, 226, 0.3)'" 
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Connect</button>
             </div>
-        </section>
-        
-        <section class="buddies-grid">
-            <!-- Buddy cards will be populated by JavaScript -->
-            <div class="buddy-card glass" data-scroll="fade-up">
-                <div class="buddy-image">
-                    <img src="p1.avif" alt="Alex Johnson">
-                    <div class="buddy-rating">
-                        <i class="fas fa-star"></i>
-                        <span>4.8</span>
+
+            <!-- Student Card 2 -->
+            <div style="
+                padding: 2rem;
+                border-radius: 1rem;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+                transition: all 0.3s ease;
+                transform: translateY(0);
+            " onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 35px rgba(31, 38, 135, 0.4)'; this.style.border='1px solid rgba(110, 69, 226, 0.5)'" 
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px 0 rgba(31, 38, 135, 0.37)'; this.style.border='1px solid rgba(255, 255, 255, 0.2)'">
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                ">
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        background: linear-gradient(45deg, #6e45e2, #ff7e5f);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-right: 1rem;
+                        color: white;
+                        font-size: 1.5rem;
+                    ">ST</div>
+                    <div>
+                        <h3 style="
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: 1.5rem;
+                            margin-bottom: 0.25rem;
+                            color: #f8f9fa;
+                        ">Smit Thorat</h3>
+                        <p style="color: rgba(255, 255, 255, 0.8);">Data Science</p>
                     </div>
                 </div>
-                <div class="buddy-info">
-                    <h3>Alex Johnson</h3>
-                    <p class="university">Stanford University</p>
-                    <div class="buddy-subjects">
-                        <span>Computer Science</span>
-                        <span>Mathematics</span>
-                    </div>
-                    <div class="buddy-availability">
-                        <p><i class="fas fa-clock"></i> Evenings, Weekends</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Library, Online</p>
-                    </div>
-                    <div class="buddy-actions">
-                        <button class="buddy-btn message-btn">Message</button>
-                        <button class="buddy-btn connect-btn">Connect</button>
-                    </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <p style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <span style="margin-right: 0.5rem;">📍</span>Seminar Hall
+                    </p>
+                    <p style="display: flex; align-items: center;">
+                        <span style="margin-right: 0.5rem;">⏰</span> 2:00 PM - 10:00 PM GMT
+                    </p>
                 </div>
+                
+                <button style="
+                    width: 100%;
+                    padding: 0.8rem;
+                    background: linear-gradient(45deg, #6e45e2, #88d3ce);
+                    border: none;
+                    border-radius: 8px;
+                    color: white;
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 20px rgba(110, 69, 226, 0.3)'" 
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Connect</button>
             </div>
-            
-            <!-- More buddy cards would be here -->
-        </section>
-        
-        <div class="pagination">
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn next">Next <i class="fas fa-chevron-right"></i></button>
+
+            <!-- Student Card 3 -->
+            <div style="
+                padding: 2rem;
+                border-radius: 1rem;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+                transition: all 0.3s ease;
+                transform: translateY(0);
+            " onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 35px rgba(31, 38, 135, 0.4)'; this.style.border='1px solid rgba(110, 69, 226, 0.5)'" 
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px 0 rgba(31, 38, 135, 0.37)'; this.style.border='1px solid rgba(255, 255, 255, 0.2)'">
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                ">
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        background: linear-gradient(45deg, #6e45e2, #ff7e5f);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-right: 1rem;
+                        color: white;
+                        font-size: 1.5rem;
+                    ">Kb</div>
+                    <div>
+                        <h3 style="
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: 1.5rem;
+                            margin-bottom: 0.25rem;
+                            color: #f8f9fa;
+                        ">Kabir</h3>
+                        <p style="color: rgba(255, 255, 255, 0.8);">Artificial Intelligence</p>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <p style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <span style="margin-right: 0.5rem;">📍</span> Admin-block
+                    </p>
+                    <p style="display: flex; align-items: center;">
+                        <span style="margin-right: 0.5rem;">⏰</span> 10:00 AM - 6:00 PM GMT
+                    </p>
+                </div>
+                
+                <button style="
+                    width: 100%;
+                    padding: 0.8rem;
+                    background: linear-gradient(45deg, #6e45e2, #88d3ce);
+                    border: none;
+                    border-radius: 8px;
+                    color: white;
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 20px rgba(110, 69, 226, 0.3)'" 
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Connect</button>
+            </div>
+
+            <!-- Student Card 4 -->
+            <div style="
+                padding: 2rem;
+                border-radius: 1rem;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+                transition: all 0.3s ease;
+                transform: translateY(0);
+            " onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 35px rgba(31, 38, 135, 0.4)'; this.style.border='1px solid rgba(110, 69, 226, 0.5)'" 
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px 0 rgba(31, 38, 135, 0.37)'; this.style.border='1px solid rgba(255, 255, 255, 0.2)'">
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                ">
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        background: linear-gradient(45deg, #6e45e2, #ff7e5f);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-right: 1rem;
+                        color: white;
+                        font-size: 1.5rem;
+                    ">SS</div>
+                    <div>
+                        <h3 style="
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: 1.5rem;
+                            margin-bottom: 0.25rem;
+                            color: #f8f9fa;
+                        ">Shubham Singh</h3>
+                        <p style="color: rgba(255, 255, 255, 0.8);">Cybersecurity</p>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <p style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <span style="margin-right: 0.5rem;">📍</span>Academic-Block
+                    </p>
+                    <p style="display: flex; align-items: center;">
+                        <span style="margin-right: 0.5rem;">⏰</span> 8:00 AM - 4:00 PM GMT
+                    </p>
+                </div>
+                
+                <button style="
+                    width: 100%;
+                    padding: 0.8rem;
+                    background: linear-gradient(45deg, #6e45e2, #88d3ce);
+                    border: none;
+                    border-radius: 8px;
+                    color: white;
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 20px rgba(110, 69, 226, 0.3)'" 
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Connect</button>
+            </div>
+
+            <!-- Student Card 5 -->
+            <div style="
+                padding: 2rem;
+                border-radius: 1rem;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+                transition: all 0.3s ease;
+                transform: translateY(0);
+            " onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 35px rgba(31, 38, 135, 0.4)'; this.style.border='1px solid rgba(110, 69, 226, 0.5)'" 
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px 0 rgba(31, 38, 135, 0.37)'; this.style.border='1px solid rgba(255, 255, 255, 0.2)'">
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                ">
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        background: linear-gradient(45deg, #6e45e2, #ff7e5f);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-right: 1rem;
+                        color: white;
+                        font-size: 1.5rem;
+                    ">AY</div>
+                    <div>
+                        <h3 style="
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: 1.5rem;
+                            margin-bottom: 0.25rem;
+                            color: #f8f9fa;
+                        ">Ayush</h3>
+                        <p style="color: rgba(255, 255, 255, 0.8);">Software Engineering</p>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <p style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <span style="margin-right: 0.5rem;">📍</span>Main Canteen
+                    </p>
+                    <p style="display: flex; align-items: center;">
+                        <span style="margin-right: 0.5rem;">⏰</span> 7:00 AM - 3:00 PM GMT
+                    </p>
+                </div>
+                
+                <button style="
+                    width: 100%;
+                    padding: 0.8rem;
+                    background: linear-gradient(45deg, #6e45e2, #88d3ce);
+                    border: none;
+                    border-radius: 8px;
+                    color: white;
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 20px rgba(110, 69, 226, 0.3)'" 
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Connect</button>
+            </div>
+
+            <!-- Student Card 6 -->
+            <div style="
+                padding: 2rem;
+                border-radius: 1rem;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+                transition: all 0.3s ease;
+                transform: translateY(0);
+            " onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 35px rgba(31, 38, 135, 0.4)'; this.style.border='1px solid rgba(110, 69, 226, 0.5)'" 
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px 0 rgba(31, 38, 135, 0.37)'; this.style.border='1px solid rgba(255, 255, 255, 0.2)'">
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                ">
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        background: linear-gradient(45deg, #6e45e2, #ff7e5f);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-right: 1rem;
+                        color: white;
+                        font-size: 1.5rem;
+                    ">SG</div>
+                    <div>
+                        <h3 style="
+                            font-family: 'Space Grotesk', sans-serif;
+                            font-size: 1.5rem;
+                            margin-bottom: 0.25rem;
+                            color: #f8f9fa;
+                        ">Sarah Gupta</h3>
+                        <p style="color: rgba(255, 255, 255, 0.8);">Machine Learning</p>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <p style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <span style="margin-right: 0.5rem;">📍</span>University garden
+                    </p>
+                    <p style="display: flex; align-items: center;">
+                        <span style="margin-right: 0.5rem;">⏰</span> 11:00 AM - 7:00 PM IST
+                    </p>
+                </div>
+                
+                <button style="
+                    width: 100%;
+                    padding: 0.8rem;
+                    background: linear-gradient(45deg, #6e45e2, #88d3ce);
+                    border: none;
+                    border-radius: 8px;
+                    color: white;
+                    font-family: 'Space Grotesk', sans-serif;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 20px rgba(110, 69, 226, 0.3)'" 
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">Connect</button>
+            </div>
         </div>
     </main>
-    
-    <!-- Footer -->
-    <footer class="glass-footer">
-        <!-- Same footer as index.html -->
-    </footer>
-    
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="main.js"></script>
     <script src="cursor.js"></script>
-    <script src="matching.js"></script>
 </body>
 </html>

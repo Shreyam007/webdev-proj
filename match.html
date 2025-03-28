@@ -3,324 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyBuddy - Your Matches</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <title>Study Buddy Finder | Match</title>
+    <link rel="stylesheet" href="/match/match.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #6e45e2;
-            --secondary-color: #88d3ce;
-            --accent-color: #ff7e5f;
-            --dark-color: #1a1a2e;
-            --light-color: #f8f9fa;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--light-color);
-            background: linear-gradient(135deg, var(--dark-color) 0%, #16213e 100%);
-            min-height: 100vh;
-        }
-
-        /* Navbar Styles (same as before) */
-        .glass-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
-            z-index: 1000;
-            transition: var(--transition);
-        }
-
-        /* [Previous navbar CSS remains exactly the same] */
-
-        .container {
-            padding: 100px 20px 80px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        /* Match Tabs */
-        .match-tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .match-tab {
-            padding: 0.8rem 1.5rem;
-            background: transparent;
-            border: none;
-            color: rgba(255, 255, 255, 0.7);
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .match-tab.active {
-            color: white;
-        }
-
-        .match-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-        }
-
-        /* Matches Grid */
-        .matches-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .match-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .match-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(31, 38, 135, 0.4);
-        }
-
-        .match-header {
-            padding: 1.5rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
-            color: white;
-            text-align: center;
-        }
-
-        .match-image {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid white;
-            margin: 0 auto 1rem;
-            overflow: hidden;
-        }
-
-        .match-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .match-name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .match-university {
-            opacity: 0.9;
-            font-size: 0.9rem;
-        }
-
-        .compatibility-meter {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            margin: 1rem 0;
-            overflow: hidden;
-        }
-
-        .compatibility-level {
-            height: 100%;
-            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
-            border-radius: 10px;
-        }
-
-        .match-details {
-            padding: 1.5rem;
-        }
-
-        .match-subjects {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .match-subjects span {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-
-        .match-info {
-            margin-bottom: 1rem;
-        }
-
-        .match-info-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .match-info-item i {
-            width: 25px;
-            color: var(--secondary-color);
-        }
-
-        .match-rating {
-            display: flex;
-            align-items: center;
-            color: #FFD700;
-            margin-bottom: 1rem;
-        }
-
-        .match-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .match-btn {
-            flex: 1;
-            padding: 0.7rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .message-btn {
-            background: var(--secondary-color);
-            color: var(--dark-color);
-        }
-
-        .connect-btn {
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
-            color: white;
-        }
-
-        .match-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* History Section */
-        .history-section {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .history-item {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .history-item:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .history-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 1rem;
-            overflow: hidden;
-        }
-
-        .history-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .history-content {
-            flex: 1;
-        }
-
-        .history-name {
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-        }
-
-        .history-action {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .history-time {
-            font-size: 0.8rem;
-            opacity: 0.6;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .matches-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .match-tabs {
-                flex-wrap: wrap;
-            }
-            
-            .match-tab {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
 </head>
 <body>
-    <!-- Navbar -->
+    <div class="gradient-bg"></div>
+    <div id="particles-js"></div>
+    
     <nav class="glass-nav">
         <div class="nav-container">
             <div class="nav-logo">
@@ -330,292 +21,380 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="browse.html">Browse</a></li>
-                <li><a href="match.html" class="active">Matches</a></li>
+                <li><a href="matches.html" class="active">Matches</a></li>
                 <li><a href="messages.html">Messages</a></li>
                 <li><a href="profile.html">Profile</a></li>
-                <li><a href="login.html" class="login-btn">Login</a></li>
+                <li><a href="login.html" class="login-btn">Logout</a></li>
             </ul>
             <div class="nav-hamburger">
-                <div></div>
-                <div></div>
-                <div></div>
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
             </div>
         </div>
     </nav>
-
-    <div class="container">
-        <h1>Your Study Matches</h1>
-        <p class="section-subtitle">Connect with students who share your study preferences</p>
-        
-        <div class="match-tabs">
-            <button class="match-tab active" data-tab="new">New Matches</button>
-            <button class="match-tab" data-tab="connected">Connected</button>
-            <button class="match-tab" data-tab="requests">Requests</button>
-        </div>
-        
-        <!-- New Matches Section -->
-        <div class="matches-grid" id="new-matches">
-            <!-- Match cards will be dynamically inserted here -->
-        </div>
-        
-        <!-- History Section -->
-        <div class="history-section">
-            <h2><i class="fas fa-history"></i> Your Connection History</h2>
-            <div id="history-list">
-                <!-- History items will be dynamically inserted here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="glass-footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <i class="fas fa-book-open"></i>
-                <span>StudyBuddy</span>
-            </div>
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h4>Navigation</h4>
-                    <a href="index.html">Home</a>
-                    <a href="browse.html">Browse</a>
-                    <a href="matches.html">Matches</a>
+    
+    <section class="match-section">
+        <div class="match-container glass">
+            <h2 class="section-title">Find Your Perfect <span>Study Match</span></h2>
+            
+            <div class="match-controls">
+                <div class="search-container glass">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search" placeholder="Search by name, subject or location...">
                 </div>
-                <div class="footer-column">
-                    <h4>Resources</h4>
-                    <a href="#">Study Tips</a>
-                    <a href="#">Blog</a>
-                    <a href="#">FAQ</a>
-                </div>
-                <div class="footer-column">
-                    <h4>Legal</h4>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
+                
+                <div class="filter-container glass">
+                    <select id="subject-filter">
+                        <option value="">All Subjects</option>
+                        <option value="Math">Math</option>
+                        <option value="Science">Science</option>
+                        <option value="Programming">Programming</option>
+                        <option value="Engineering">Engineering</option>
+                    </select>
+                    <select id="location-filter">
+                        <option value="">All Locations</option>
+                        <option value="Library">Library</option>
+                        <option value="Hostel">Hostel</option>
+                        <option value="Cafe">Cafe</option>
+                        <option value="Online">Online</option>
+                    </select>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 Study Buddy Finder. All rights reserved.</p>
+            
+            <div class="match-grid" id="matchGrid">
+                <!-- Akshra Singh -->
+                <div class="match-card glass">
+                    <div class="match-compatibility">92%</div>
+                    <div class="match-card-header">
+                        <img src="/users/akshra.jpeg" alt="Akshra Singh" class="match-card-avatar">
+                        <div>
+                            <div class="match-card-name">Akshra Singh</div>
+                            <div class="match-card-course">Computer Science</div>
+                        </div>
+                    </div>
+                    <div class="match-card-details">
+                        <div class="match-card-detail">
+                            <i class="fas fa-book"></i>
+                            <span>Programming</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon, Wed 2-4 PM</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Library</span>
+                        </div>
+                    </div>
+                    <p class="match-card-bio">Looking for someone to study algorithms and data structures with. Prefer pair programming sessions.</p>
+                    <div class="match-card-actions">
+                        <button class="match-card-btn primary connect-btn">Connect</button>
+                        <button class="match-card-btn secondary message-btn" data-user='{
+                            "id":1,
+                            "name":"Akshra Singh",
+                            "course":"Computer Science",
+                            "avatar":"/users/akshra.jpeg",
+                            "subject":"Programming",
+                            "bio":"Looking for someone to study algorithms and data structures with. Prefer pair programming sessions."
+                        }'>Message</button>
+                    </div>
+                </div>
+
+                <!-- Ayush -->
+                <div class="match-card glass">
+                    <div class="match-compatibility">87%</div>
+                    <div class="match-card-header">
+                        <img src="/users/ayush.jpeg" alt="Ayush" class="match-card-avatar">
+                        <div>
+                            <div class="match-card-name">Ayush</div>
+                            <div class="match-card-course">Electrical Engineering</div>
+                        </div>
+                    </div>
+                    <div class="match-card-details">
+                        <div class="match-card-detail">
+                            <i class="fas fa-book"></i>
+                            <span>Math</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Tue, Thu 6-8 PM</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Hostel</span>
+                        </div>
+                    </div>
+                    <p class="match-card-bio">Need help with advanced calculus. Can also help with circuit theory in exchange.</p>
+                    <div class="match-card-actions">
+                        <button class="match-card-btn primary connect-btn">Connect</button>
+                        <button class="match-card-btn secondary message-btn" data-user='{
+                            "id":2,
+                            "name":"Ayush",
+                            "course":"Electrical Engineering",
+                            "avatar":"/users/ayush.jpeg",
+                            "subject":"Math",
+                            "bio":"Need help with advanced calculus. Can also help with circuit theory in exchange."
+                        }'>Message</button>
+                    </div>
+                </div>
+
+                <!-- Shreyam -->
+                <div class="match-card glass">
+                    <div class="match-compatibility">95%</div>
+                    <div class="match-card-header">
+                        <img src="/users/shreyam.jpeg" alt="Shreyam" class="match-card-avatar">
+                        <div>
+                            <div class="match-card-name">Shreyam</div>
+                            <div class="match-card-course">Data Science</div>
+                        </div>
+                    </div>
+                    <div class="match-card-details">
+                        <div class="match-card-detail">
+                            <i class="fas fa-book"></i>
+                            <span>Statistics</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Flexible</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <p class="match-card-bio">Looking for study partners for machine learning projects. Comfortable with Zoom/Teams.</p>
+                    <div class="match-card-actions">
+                        <button class="match-card-btn primary connect-btn">Connect</button>
+                        <button class="match-card-btn secondary message-btn" data-user='{
+                            "id":3,
+                            "name":"Shreyam",
+                            "course":"Data Science",
+                            "avatar":"/users/shreyam.jpeg",
+                            "subject":"Statistics",
+                            "bio":"Looking for study partners for machine learning projects. Comfortable with Zoom/Teams."
+                        }'>Message</button>
+                    </div>
+                </div>
+
+                <!-- Vaishnavi -->
+                <div class="match-card glass">
+                    <div class="match-compatibility">78%</div>
+                    <div class="match-card-header">
+                        <img src="/users/vaishnavi.jpeg" alt="Vaishnavi" class="match-card-avatar">
+                        <div>
+                            <div class="match-card-name">Vaishnavi</div>
+                            <div class="match-card-course">Mechanical Engineering</div>
+                        </div>
+                    </div>
+                    <div class="match-card-details">
+                        <div class="match-card-detail">
+                            <i class="fas fa-book"></i>
+                            <span>Physics</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Weekends</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Cafe</span>
+                        </div>
+                    </div>
+                    <p class="match-card-bio">Study best in casual environments. Looking for thermodynamics study group.</p>
+                    <div class="match-card-actions">
+                        <button class="match-card-btn primary connect-btn">Connect</button>
+                        <button class="match-card-btn secondary message-btn" data-user='{
+                            "id":4,
+                            "name":"Vaishnavi",
+                            "course":"Mechanical Engineering",
+                            "avatar":"/users/vaishnavi.jpeg",
+                            "subject":"Physics",
+                            "bio":"Study best in casual environments. Looking for thermodynamics study group."
+                        }'>Message</button>
+                    </div>
+                </div>
+
+                <!-- Krutika Deshmukh -->
+                <div class="match-card glass">
+                    <div class="match-compatibility">85%</div>
+                    <div class="match-card-header">
+                        <img src="/users/krutika.jpeg" alt="Krutika Deshmukh" class="match-card-avatar">
+                        <div>
+                            <div class="match-card-name">Krutika Deshmukh</div>
+                            <div class="match-card-course">Biochemistry</div>
+                        </div>
+                    </div>
+                    <div class="match-card-details">
+                        <div class="match-card-detail">
+                            <i class="fas fa-book"></i>
+                            <span>Chemistry</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Fri 1-5 PM</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Library</span>
+                        </div>
+                    </div>
+                    <p class="match-card-bio">Organic chemistry study partner needed. Willing to form study group.</p>
+                    <div class="match-card-actions">
+                        <button class="match-card-btn primary connect-btn">Connect</button>
+                        <button class="match-card-btn secondary message-btn" data-user='{
+                            "id":5,
+                            "name":"Krutika Deshmukh",
+                            "course":"Biochemistry",
+                            "avatar":"/users/krutika.jpeg",
+                            "subject":"Chemistry",
+                            "bio":"Organic chemistry study partner needed. Willing to form study group."
+                        }'>Message</button>
+                    </div>
+                </div>
+
+                <!-- Shubhadeep -->
+                <div class="match-card glass">
+                    <div class="match-compatibility">91%</div>
+                    <div class="match-card-header">
+                        <img src="/users/shubhadeep.jpeg" alt="Shubhadeep" class="match-card-avatar">
+                        <div>
+                            <div class="match-card-name">Shubhadeep</div>
+                            <div class="match-card-course">Artificial Intelligence</div>
+                        </div>
+                    </div>
+                    <div class="match-card-details">
+                        <div class="match-card-detail">
+                            <i class="fas fa-book"></i>
+                            <span>Programming</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Evenings</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <p class="match-card-bio">Python and AI enthusiast. Looking for coding partners for projects.</p>
+                    <div class="match-card-actions">
+                        <button class="match-card-btn primary connect-btn">Connect</button>
+                        <button class="match-card-btn secondary message-btn" data-user='{
+                            "id":6,
+                            "name":"Shubhadeep",
+                            "course":"Artificial Intelligence",
+                            "avatar":"/users/shubhadeep.jpeg",
+                            "subject":"Programming",
+                            "bio":"Python and AI enthusiast. Looking for coding partners for projects."
+                        }'>Message</button>
+                    </div>
+                </div>
+
+                <!-- Manik Gupta -->
+                <div class="match-card glass">
+                    <div class="match-compatibility">91%</div>
+                    <div class="match-card-header">
+                        <img src="/users/manik.jpeg" alt="Manik Gupta" class="match-card-avatar">
+                        <div>
+                            <div class="match-card-name">Manik Gupta</div>
+                            <div class="match-card-course">Artificial Intelligence</div>
+                        </div>
+                    </div>
+                    <div class="match-card-details">
+                        <div class="match-card-detail">
+                            <i class="fas fa-book"></i>
+                            <span>Programming</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>Evenings</span>
+                        </div>
+                        <div class="match-card-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                    <p class="match-card-bio">Python and AI enthusiast. Looking for coding partners for projects.</p>
+                    <div class="match-card-actions">
+                        <button class="match-card-btn primary connect-btn">Connect</button>
+                        <button class="match-card-btn secondary message-btn" data-user='{
+                            "id":7,
+                            "name":"Manik Gupta",
+                            "course":"Artificial Intelligence",
+                            "avatar":"/users/manik.jpeg",
+                            "subject":"Programming",
+                            "bio":"Python and AI enthusiast. Looking for coding partners for projects."
+                        }'>Message</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </footer>
-
+    </section>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Sample data - in a real app this would come from your backend
-        const matchesData = [
-            {
-                id: 1,
-                name: "Sarah Johnson",
-                university: "MIT Computer Science",
-                subjects: ["Data Structures", "Algorithms", "Web Programming"],
-                availability: "Mon/Wed/Fri 2-5 PM",
-                locations: "Library, Computer Lab",
-                rating: 4.5,
-                reviews: 8,
-                compatibility: 92,
-                image: "https://randomuser.me/api/portraits/women/44.jpg",
-                timestamp: "2023-06-15T10:30:00",
-                status: "new"
-            },
-            {
-                id: 2,
-                name: "Alex Chen",
-                university: "Stanford Engineering",
-                subjects: ["Mathematics", "Physics", "OOP"],
-                availability: "Tue/Thu 9-12 AM",
-                locations: "Academic Block, Canteen",
-                rating: 4.0,
-                reviews: 12,
-                compatibility: 87,
-                image: "https://randomuser.me/api/portraits/men/32.jpg",
-                timestamp: "2023-06-14T14:20:00",
-                status: "new"
-            },
-            {
-                id: 3,
-                name: "Priya Patel",
-                university: "IIT Delhi",
-                subjects: ["AI", "Machine Learning", "Database"],
-                availability: "Weekends 10AM-2PM",
-                locations: "Hostel, Online",
-                rating: 5.0,
-                reviews: 15,
-                compatibility: 95,
-                image: "https://randomuser.me/api/portraits/women/68.jpg",
-                timestamp: "2023-06-13T16:45:00",
-                status: "connected"
-            },
-            {
-                id: 4,
-                name: "Michael Brown",
-                university: "Harvard CS",
-                subjects: ["Networking", "OS", "Cyber Security"],
-                availability: "Evenings after 7PM",
-                locations: "Online",
-                rating: 4.8,
-                reviews: 5,
-                compatibility: 89,
-                image: "https://randomuser.me/api/portraits/men/75.jpg",
-                timestamp: "2023-06-12T11:15:00",
-                status: "request"
-            }
-        ];
-
-        // History data (will be updated when connections are made)
-        let historyData = [
-            {
-                id: 101,
-                name: "Emma Wilson",
-                action: "You connected 2 days ago",
-                time: "Jun 13, 2023",
-                image: "https://randomuser.me/api/portraits/women/33.jpg"
-            },
-            {
-                id: 102,
-                name: "David Kim",
-                action: "Sent you a connection request",
-                time: "Jun 10, 2023",
-                image: "https://randomuser.me/api/portraits/men/45.jpg"
-            }
-        ];
-
-        // DOM Elements
-        const newMatchesGrid = document.getElementById('new-matches');
-        const historyList = document.getElementById('history-list');
-        const matchTabs = document.querySelectorAll('.match-tab');
-
-        // Render matches
-        function renderMatches(filter = 'new') {
-            newMatchesGrid.innerHTML = '';
-            const filteredMatches = matchesData.filter(match => match.status === filter);
-            
-            if(filteredMatches.length === 0) {
-                newMatchesGrid.innerHTML = `<p class="no-matches">No ${filter} matches found</p>`;
-                return;
-            }
-
-            filteredMatches.forEach(match => {
-                const matchCard = document.createElement('div');
-                matchCard.className = 'match-card glass';
-                matchCard.innerHTML = `
-                    <div class="match-header">
-                        <div class="match-image">
-                            <img src="${match.image}" alt="${match.name}">
-                        </div>
-                        <h3 class="match-name">${match.name}</h3>
-                        <p class="match-university">${match.university}</p>
-                        <div class="compatibility-meter">
-                            <div class="compatibility-level" style="width: ${match.compatibility}%"></div>
-                        </div>
-                    </div>
-                    <div class="match-details">
-                        <div class="match-subjects">
-                            ${match.subjects.map(subject => `<span>${subject}</span>`).join('')}
-                        </div>
-                        <div class="match-info">
-                            <div class="match-info-item">
-                                <i class="fas fa-clock"></i>
-                                <span>${match.availability}</span>
-                            </div>
-                            <div class="match-info-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>${match.locations}</span>
-                            </div>
-                        </div>
-                        <div class="match-rating">
-                            ${Array(Math.floor(match.rating)).fill('<i class="fas fa-star"></i>').join('')}
-                            ${match.rating % 1 !== 0 ? '<i class="fas fa-star-half-alt"></i>' : ''}
-                            ${Array(5 - Math.ceil(match.rating)).fill('<i class="far fa-star"></i>').join('')}
-                            <span>(${match.reviews} reviews)</span>
-                        </div>
-                        <div class="match-actions">
-                            <button class="match-btn message-btn" data-id="${match.id}">Message</button>
-                            <button class="match-btn connect-btn" data-id="${match.id}">
-                                ${filter === 'requests' ? 'Accept' : 'Connect'}
-                            </button>
-                        </div>
-                    </div>
-                `;
-                newMatchesGrid.appendChild(matchCard);
-            });
+        // Initialize particles
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS.load('particles-js', 'particles.json');
         }
 
-        // Render history
-        function renderHistory() {
-            historyList.innerHTML = '';
-            
-            historyData.forEach(item => {
-                const historyItem = document.createElement('div');
-                historyItem.className = 'history-item glass';
-                historyItem.innerHTML = `
-                    <div class="history-avatar">
-                        <img src="${item.image}" alt="${item.name}">
-                    </div>
-                    <div class="history-content">
-                        <div class="history-name">${item.name}</div>
-                        <div class="history-action">${item.action}</div>
-                    </div>
-                    <div class="history-time">${item.time}</div>
-                `;
-                historyList.appendChild(historyItem);
-            });
-        }
-
-        // Tab switching
-        matchTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                matchTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                renderMatches(tab.dataset.tab);
-            });
-        });
-
-        // Handle connection requests
-        document.addEventListener('click', function(e) {
-            if(e.target.classList.contains('connect-btn')) {
-                const matchId = parseInt(e.target.dataset.id);
-                const match = matchesData.find(m => m.id === matchId);
-                
-                // Update match status
-                match.status = "connected";
-                
-                // Add to history
-                historyData.unshift({
-                    id: Date.now(),
-                    name: match.name,
-                    action: "You connected just now",
-                    time: "Today",
-                    image: match.image
+        // Message button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.message-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const userData = JSON.parse(this.dataset.user);
+                    localStorage.setItem('currentChatUser', JSON.stringify(userData));
+                    window.location.href = '/messages/messages.html';
                 });
-                
-                // Re-render
-                renderMatches(document.querySelector('.match-tab.active').dataset.tab);
-                renderHistory();
-                
-                alert(`Connected with ${match.name}!`);
-            }
-            
-            if(e.target.classList.contains('message-btn')) {
-                const matchId = parseInt(e.target.dataset.id);
-                const match = matchesData.find(m => m.id === matchId);
-                alert(`Opening chat with ${match.name}`);
+            });
+
+            // Connect button functionality
+            document.querySelectorAll('.connect-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const userName = this.closest('.match-card').querySelector('.match-card-name').textContent;
+                    alert(`Connection request sent to ${userName}!`);
+                });
+            });
+
+            // Search/filter functionality
+            const searchInput = document.getElementById('search');
+            const subjectFilter = document.getElementById('subject-filter');
+            const locationFilter = document.getElementById('location-filter');
+
+            [searchInput, subjectFilter, locationFilter].forEach(element => {
+                element.addEventListener('input', filterUsers);
+                element.addEventListener('change', filterUsers);
+            });
+
+            function filterUsers() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const subject = subjectFilter.value;
+                const location = locationFilter.value;
+                const cards = document.querySelectorAll('.match-card');
+
+                cards.forEach(card => {
+                    const name = card.querySelector('.match-card-name').textContent.toLowerCase();
+                    const course = card.querySelector('.match-card-course').textContent.toLowerCase();
+                    const subjectText = card.querySelector('.match-card-detail:nth-child(1) span').textContent.toLowerCase();
+                    const bio = card.querySelector('.match-card-bio').textContent.toLowerCase();
+                    const locationText = card.querySelector('.match-card-detail:nth-child(3) span').textContent;
+
+                    const matchesSearch = name.includes(searchTerm) || 
+                                        course.includes(searchTerm) || 
+                                        subjectText.includes(searchTerm) || 
+                                        bio.includes(searchTerm);
+                    const matchesSubject = subject ? subjectText === subject.toLowerCase() : true;
+                    const matchesLocation = location ? locationText === location : true;
+
+                    if (matchesSearch && matchesSubject && matchesLocation) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             }
         });
-
-        // Initialize
-        renderMatches();
-        renderHistory();
-
-        // Navbar toggle for mobile
-        const hamburger = document.querySelector('.nav-hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        
-        if(hamburger) {
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
-        }
     </script>
 </body>
 </html>

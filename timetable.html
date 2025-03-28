@@ -25,6 +25,30 @@
             box-sizing: border-box;
         }
 
+        /* Study Hub Cursor */
+        .study-cursor {
+        position: fixed;
+        width: 16px;
+        height: 16px;
+        background: rgba(110, 69, 226, 0.5); /* Primary purple with transparency */
+        border: 2px solid #88d3ce; /* Teal border */
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: 
+        transform 0.15s ease,
+        width 0.2s ease,
+        height 0.2s ease,
+        background 0.2s ease;
+}
+
+        .study-cursor-hover {
+        transform: translate(-50%, -50%) scale(1.8);
+        background: rgba(255, 126, 95, 0.7); /* Accent orange */
+        border-color: #6e45e2; /* Purple border on hover */
+}        
+
         body {
             font-family: 'Poppins', sans-serif;
             color: var(--light-color);
@@ -407,12 +431,19 @@
                 <img src="logo.png" alt="Logo" class="nav-logo-img" style="height: 60px; width: auto;">
             </div><ul class="nav-links">
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="browse.html">Browse</a></li>
-                <li><a href="matches.html">Matches</a></li>
-                <li><a href="messages.html">Messages</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="login.html" class="login-btn">Login</a></li>
+                <li><a href="index.html" style="text-decoration: none;">Home</a></li>
+                <li><a href="browse.html" style="text-decoration: none;">Browse</a></li>
+                <li><a href="match.html" style="text-decoration: none;">Matches</a></li>
+                <li><a href="messages.html" style="text-decoration: none;">Messages</a></li>
+                <li><a href="profile.html" style="text-decoration: none;">Profile</a></li>
+                <li><a href="login.html" class="login-btn"style="
+                    padding: 0.5rem 1.5rem;
+                    background: linear-gradient(45deg, #6e45e2, #ff7e5f);
+                    border-radius: 50px;
+                    color: white;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                ">Login</a></li>
             </ul>
             <div class="nav-hamburger">
                 <div></div>
@@ -571,5 +602,8 @@
             });
         });
     </script>
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script src="main.js"></script>
+        <script src="cursor.js"></script>
 </body>
 </html>

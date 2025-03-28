@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Buddy Blog | Tips & Resources for Effective Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #6e45e2;
+            --secondary-color: #88d3ce;
+            --accent-color: #ff7e5f;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Study Hub Cursor */
+        .study-cursor {
+            position: fixed;
+            width: 16px;
+            height: 16px;
+            background: rgba(110, 69, 226, 0.5);
+            border: 2px solid #88d3ce;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: 
+                transform 0.15s ease,
+                width 0.2s ease,
+                height 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .study-cursor-hover {
+            transform: translate(-50%, -50%) scale(1.8);
+            background: rgba(255, 126, 95, 0.7);
+            border-color: #6e45e2;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: var(--dark-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Dynamic Gradient Background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark-color) 0%, #16213e 100%);
+            z-index: -2;
+            transition: background 0.5s ease;
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: transparent;
+        }
+
+        /* Navbar Specific Styles */
+        .glass-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-logo-icon {
+            font-size: 2rem;
+            color: var(--light-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--light-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            position: relative;
+            padding: 0.5rem 0;
+            font-weight: 500;
+            color: var(--light-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .login-btn {
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 50px;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(110, 69, 226, 0.4);
+        }
+
+        /* Mobile Menu Styles */
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .nav-hamburger div {
+            width: 100%;
+            height: 3px;
+            background: white;
+            transition: var(--transition);
+        }
+
+        /* Blog Hero Section */
+        .blog-hero {
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            color: var(--light-color);
+            position: relative;
+            text-align: center;
+        }
+
+        .blog-hero-content {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .blog-hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-hero-title span {
+            color: var(--secondary-color);
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .blog-hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .blog-search {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            border-radius: 50px;
+            overflow: hidden;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .blog-search input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .blog-search input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .blog-search button {
+            padding: 0 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .blog-search button:hover {
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 5%;
+        }
+
+        .view-all {
+            color: var(--secondary-color);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .view-all:hover {
+            color: var(--accent-color);
+        }
+
+        /* Featured Posts */
+        .featured-posts {
+            padding: 4rem 0;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .featured-card {
+            display: flex;
+            flex-direction: column;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: var(--transition);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .featured-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(31, 38, 135, 0.4);
+        }
+
+        .post-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .featured-card:hover .post-image img {
+            transform: scale(1.05);
+        }
+
+        .post-category {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .post-meta i {
+            margin-right: 0.3rem;
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-color);
+        }
+
+        .post-excerpt {
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            flex: 1;
+        }
+
+        .read-more {
+            color: var(--secondary-color);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .read-more i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: var(--accent-color);
+        }
+
+        .read-more:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Blog Categories */
+        .blog-categories {
+            padding: 4rem 5%;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-radius: 1rem;
+            transition: var(--transition);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .category-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--light-color);
+        }
+
+        .category-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Recent Posts */
+        .recent-posts {
+            padding: 4rem 5%;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .post-card {
+            display: flex;
+            flex-direction: column;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: var(--transition);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(31, 38, 135, 0.4);
+        }
+
+        .post-card .post-image {
+            height: 200px;
+        }
+
+        .post-card .post-content {
+            padding: 1.5rem;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            display: flex;
+            border-radius: 1rem;
+            overflow: hidden;
+            max-width: 1200px;
+            margin: 4rem auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .newsletter-content {
+            flex: 1;
+            padding: 3rem;
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--light-color);
+        }
+
+        .newsletter p {
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .newsletter-form {
+            display: flex;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .newsletter-form button {
+            padding: 0 2rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border: none;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+        }
+
+        .newsletter-image {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .newsletter-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Footer */
+        .glass-footer {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
+            padding: 3rem 5%;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-logo img {
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h4 {
+            color: var(--light-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-column a i {
+            margin-right: 0.5rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-legal a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+
+        .footer-legal a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .blog-hero-title {
+                font-size: 2.8rem;
+            }
+
+            .newsletter {
+                flex-direction: column;
+            }
+
+            .newsletter-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--glass-bg);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: left 0.3s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-hamburger {
+                display: flex;
+            }
+            
+            .nav-hamburger.active .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .nav-hamburger.active .line2 {
+                opacity: 0;
+            }
+            
+            .nav-hamburger.active .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .blog-hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .newsletter-content {
+                padding: 2rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer-legal {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .blog-hero-title {
+                font-size: 2rem;
+            }
+
+            .blog-search {
+                flex-direction: column;
+                border-radius: 1rem;
+            }
+
+            .blog-search input {
+                padding: 1rem;
+            }
+
+            .blog-search button {
+                padding: 1rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                border-radius: 1rem;
+            }
+
+            .newsletter-form input {
+                padding: 1rem;
+            }
+
+            .newsletter-form button {
+                padding: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dynamic Gradient Background -->
+    <div class="gradient-bg"></div>
+    
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Glass Morphism Navbar -->
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <div class="nav-logo" style="margin-right: auto; padding-left: 20px;">
+                <img src="logo.png" alt="Logo" class="nav-logo-img" style="height: 60px; width: auto;">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="study.html">Browse</a></li>
+                <li><a href="matches.html">Matches</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="login.html" class="login-btn"
+                    style="padding: 0.5rem 1.5rem;
+                    background: linear-gradient(45deg, #6e45e2, #ff7e5f);
+                    border-radius: 50px;
+                    color: white;
+                    text-decoration: none;
+                    transition: all 0.3s ease;">Login</a></li>
+            </ul>
+            <div class="nav-hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Blog Hero Section -->
+    <section class="blog-hero">
+        <div class="blog-hero-content">
+            <h1 class="blog-hero-title">Study Buddy <span>Blog</span></h1>
+            <p class="blog-hero-subtitle">Discover tips, strategies, and resources to enhance your collaborative learning experience</p>
+            <div class="blog-search">
+                <input type="text" placeholder="Search articles...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Posts Section -->
+    <section class="featured-posts">
+        <div class="section-header">
+            <h2 class="section-title">Featured Articles</h2>
+            <a href="#" class="view-all">View All</a>
+        </div>
+        
+        <div class="featured-grid">
+            <article class="featured-card">
+                <div class="post-image">
+                    <img src="learning.jpg" alt="Students collaborating">
+                    <div class="post-category">Study Techniques</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-date"><i class="far fa-calendar"></i> June 15, 2023</span>
+                        <span class="post-readtime"><i class="far fa-clock"></i> 5 min read</span>
+                    </div>
+                    <h3 class="post-title">10 Proven Techniques for Effective Collaborative Learning</h3>
+                    <p class="post-excerpt">Discover how to maximize your study sessions when working with a partner or group to boost retention and understanding.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+            
+            <article class="featured-card">
+                <div class="post-image">
+                    <img src="virtualstudy.avif" alt="Online study session">
+                    <div class="post-category">Remote Learning</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-date"><i class="far fa-calendar"></i> May 28, 2023</span>
+                        <span class="post-readtime"><i class="far fa-clock"></i> 4 min read</span>
+                    </div>
+                    <h3 class="post-title">Making Virtual Study Sessions as Effective as In-Person</h3>
+                    <p class="post-excerpt">Essential tools and strategies to create productive online study sessions with your study buddy.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <!-- Blog Categories Section -->
+    <section class="blog-categories">
+        <h2 class="section-title">Browse by Category</h2>
+        <div class="categories-grid">
+            <a href="#" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Study Techniques</h3>
+                <p>15 Articles</p>
+            </a>
+            
+            <a href="#" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <h3>Remote Learning</h3>
+                <p>8 Articles</p>
+            </a>
+            
+            <a href="#" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Collaboration</h3>
+                <p>12 Articles</p>
+            </a>
+            
+            <a href="#" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Subject Guides</h3>
+                <p>22 Articles</p>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Recent Posts Section -->
+    <section class="recent-posts">
+        <div class="section-header">
+            <h2 class="section-title">Recent Articles</h2>
+            <a href="#" class="view-all">View All</a>
+        </div>
+        
+        <div class="posts-grid">
+            <article class="post-card">
+                <div class="post-image">
+                    <img src="timemagement.jpg" alt="Time management">
+                    <div class="post-category">Productivity</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-date"><i class="far fa-calendar"></i> June 5, 2023</span>
+                    </div>
+                    <h3 class="post-title">Syncing Schedules: How to Align Study Times With Your Buddy</h3>
+                    <p class="post-excerpt">Practical tips for finding overlapping free time and making the most of your shared study sessions.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+            
+            <article class="post-card">
+                <div class="post-image">
+                    <img src="exam.webp" alt="Exam preparation">
+                    <div class="post-category">Exam Tips</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-date"><i class="far fa-calendar"></i> May 22, 2023</span>
+                    </div>
+                    <h3 class="post-title">The Study Buddy Approach to Finals Preparation</h3>
+                    <p class="post-excerpt">A comprehensive guide to dividing topics, quizzing each other, and staying motivated during crunch time.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+            
+            <article class="post-card">
+                <div class="post-image">
+                    <img src="studybase.jpg" alt="Study space">
+                    <div class="post-category">Environment</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-date"><i class="far fa-calendar"></i> May 15, 2023</span>
+                    </div>
+                    <h3 class="post-title">Creating the Ideal Shared Study Environment</h3>
+                    <p class="post-excerpt">How to set up physical and virtual spaces that promote focus and collaboration.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+            
+            <article class="post-card">
+                <div class="post-image">
+                    <img src="accountability.jpg" alt="Accountability partners">
+                    <div class="post-category">Motivation</div>
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-date"><i class="far fa-calendar"></i> May 8, 2023</span>
+                    </div>
+                    <h3 class="post-title">The Power of Accountability Partners in Academic Success</h3>
+                    <p class="post-excerpt">How study buddies can help you stay on track and achieve your learning goals.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h2>Stay Updated with Study Tips</h2>
+            <p>Subscribe to our newsletter for the latest articles on collaborative learning strategies</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+        <div class="newsletter-image">
+            <img src="newsletter.png" alt="Newsletter illustration">
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="glass-footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="logo.png" alt="Study Buddy Finder" style="height: 50px;">
+                <p>Connecting students for better learning outcomes</p>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="study.html">Find a Buddy</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Study Tips</a></li>
+                        <li><a href="#">Subject Guides</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Study Buddy Finder. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.nav-hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Custom cursor effect
+        const cursor = document.createElement('div');
+        cursor.classList.add('study-cursor');
+        document.body.appendChild(cursor);
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Add hover effect to interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .category-card, .featured-card, .post-card');
+        
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.classList.add('study-cursor-hover');
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.classList.remove('study-cursor-hover');
+            });
+        });
+    </script>
+</body>
+</html>

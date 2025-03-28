@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Buddy | Messages</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/messages/messages.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="gradient-bg"></div>
+    
+    <div id="particles-js"></div>
+    
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-book-open"></i>
+                <span>StudyBuddy</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="matches.html">Matches</a></li>
+                <li><a href="messages.html" class="active">Messages</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="login.html" class="login-btn">Logout</a></li>
+            </ul>
+            <div class="nav-hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="messaging-container">
+        <div class="conversation-list glass">
+            <div class="conversation-header">
+                <h2>Messages</h2>
+                <div class="search-conversation">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search messages...">
+                </div>
+            </div>
+            
+            <div class="conversations">
+                <!-- chat items inserted here by js -->
+            </div>
+        </div>
+        
+        <div class="chat-container glass">
+            <div class="empty-chat" id="emptyChat">
+                <i class="fas fa-comments"></i>
+                <h3>Select a conversation</h3>
+                <p>Choose a study buddy to start chatting</p>
+            </div>
+            
+            <div class="active-chat" id="activeChat">
+                <div class="chat-header">
+                    <div class="chat-user">
+                        <img src="" alt="Profile" class="chat-user-avatar" id="chatUserAvatar">
+                        <div class="chat-user-info">
+                            <h3 id="chatUserName">Alex Johnson</h3>
+                            <p id="chatUserCourse">Computer Science</p>
+                        </div>
+                    </div>
+                    <div class="chat-actions">
+                        <button class="btn-icon"><i class="fas fa-info-circle"></i></button>
+                    </div>
+                </div>
+                
+                <div class="messages" id="messagesContainer">
+                    <!-- messages will be inserted here -->
+                </div>
+                
+                <!-- Message input -->
+                <div class="message-input">
+                    <button class="btn-icon" id="attachmentBtn"><i class="fas fa-paperclip"></i></button>
+                    <input type="text" placeholder="Type a message..." id="messageInput">
+                    <button class="btn-send" id="sendMessageBtn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <div class="attachment-modal glass" id="attachmentModal">
+                    <div class="attachment-header">
+                        <h3>Send File</h3>
+                        <button class="btn-icon close-attachment"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="attachment-options">
+                        <label class="attachment-option">
+                            <i class="fas fa-image"></i>
+                            <span>Photo</span>
+                            <input type="file" accept="image/*" class="file-input" hidden>
+                        </label>
+                        <label class="attachment-option">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Document</span>
+                            <input type="file" accept=".pdf,.doc,.docx" class="file-input" hidden>
+                        </label>
+                        <label class="attachment-option">
+                            <i class="fas fa-file-code"></i>
+                            <span>Code</span>
+                            <input type="file" accept=".js,.py,.java,.cpp" class="file-input" hidden>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="/messages/messages.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
